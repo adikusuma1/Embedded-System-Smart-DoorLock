@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<flowgorithm fileversion="3.0">
+    <attributes>
+        <attribute name="name" value=""/>
+        <attribute name="authors" value="M S I"/>
+        <attribute name="about" value=""/>
+        <attribute name="saved" value="2024-05-25 04:10:49 PM"/>
+        <attribute name="created" value="TSBTIEk7UVVFTFlOOzIwMjQtMDUtMjU7MDM6MzY6MzUgUE07MjA1OQ=="/>
+        <attribute name="edited" value="TSBTIEk7UVVFTFlOOzIwMjQtMDUtMjU7MDQ6MTA6NDkgUE07MTsyMTY1"/>
+    </attributes>
+    <function name="Main" type="None" variable="">
+        <parameters/>
+        <body>
+            <input variable="InitialPass"/>
+            <output expression="ServoMotor(180)" newline="True"/>
+            <call expression="LowPower"/>
+            <if expression="Button2 == 1">
+                <then>
+                    <output expression="ServoMotor(0)" newline="True"/>
+                </then>
+                <else>
+                    <if expression="Button1 == 1">
+                        <then>
+                            <input variable="Password"/>
+                            <if expression="millis &gt;= 15000">
+                                <then/>
+                                <else>
+                                    <if expression="Password == USSD">
+                                        <then>
+                                            <call expression="ChangePass"/>
+                                        </then>
+                                        <else>
+                                            <if expression="Password == USSDForget">
+                                                <then>
+                                                    <call expression="ForgetPass"/>
+                                                </then>
+                                                <else>
+                                                    <if expression="Password == InitialPass">
+                                                        <then>
+                                                            <output expression="LCD = &quot;Pass Accepted&quot;" newline="True"/>
+                                                            <output expression="ServoMotor(0)" newline="True"/>
+                                                            <output expression="Buzzer = 1" newline="True"/>
+                                                            <output expression="Buzzer = 1" newline="True"/>
+                                                        </then>
+                                                        <else>
+                                                            <output expression="LCD = &quot;Wrong Password&quot;" newline="True"/>
+                                                            <output expression="ServoMotor(180)" newline="True"/>
+                                                            <output expression="Buzzer = 1" newline="True"/>
+                                                        </else>
+                                                    </if>
+                                                </else>
+                                            </if>
+                                        </else>
+                                    </if>
+                                </else>
+                            </if>
+                        </then>
+                        <else/>
+                    </if>
+                </else>
+            </if>
+            <output expression="ServoMotor(180)" newline="True"/>
+        </body>
+    </function>
+</flowgorithm>
